@@ -1,0 +1,36 @@
+default:
+  extensions:
+      Behat\MinkExtension:
+          base_url: "https://www.atrapalo.com"
+          goutte: ~
+          default_session: selenium2
+          show_cmd: 'open -a Google\ Chrome %s'
+          browser_name: 'chrome'
+          selenium2:
+              wd_host: 'http://127.0.0.1:4444/wd/hub'
+              capabilities:
+                  version: ''
+      SensioLabs\Behat\PageObjectExtension:
+          namespaces:
+              page: \src\Page
+              element: \src\Page\Element
+      FriendsOfBehat\PerformanceExtension: ~
+
+  suites:
+      gb:
+          path: %paths.base%/features/gb
+          filters:
+              tags: '@production'
+          contexts:
+              - src\FeatureContext:
+                  parameters:
+                      baseUrl: 'https://shop.mango.com'
+              - src\HomeContext:
+                  parameters:
+                      baseUrl: 'https://shop.mango.com'
+              - src\ProductSheetContext:
+                  parameters:
+                      baseUrl: 'https://www.atrapalo.com'
+              - src\CartContext:
+                  parameters:
+                      baseUrl: 'https://www.atrapalo.com'
